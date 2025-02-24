@@ -6,6 +6,15 @@ export class Character {
     this.buffer = new ArrayBuffer(4);
     this.view = new DataView(this.buffer);
   }
+  get baseAttack() {
+    return this._baseAttack;
+  }
+  set baseAttack(value) {
+    if (value < 0) {
+      throw new Error("Base attack cannot be negative");
+    }
+    this._baseAttack = value;
+  }
 
   get stoned() {
     return this._stoned;
@@ -61,5 +70,5 @@ export class Daemon extends Character {
 }
 const magician = new Magician(100);
 const daemon = new Daemon(100);
-console.log("Magician attack on distance 2:", magician.getAttack(2));  
+console.log("Magician attack on distance 2:", magician.getAttack(2));
 console.log("Daemon attack on distance 3:", daemon.getAttack(3));
